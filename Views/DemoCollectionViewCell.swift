@@ -46,12 +46,11 @@ class DemoCollectionViewCell: UICollectionViewCell {
         
         containerView = MDKLayerViewDesignable(frame: bounds)
         if let containerView = containerView {
-            let padding:CGFloat = 0.0
             
             containerView.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(containerView)
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding).isActive = true
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding).isActive = true
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: desiredPadding).isActive = true
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -desiredPadding).isActive = true
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
             
@@ -92,6 +91,7 @@ class DemoCollectionViewCell: UICollectionViewCell {
                                attribute: .notAnAttribute,
                                multiplier: 1.0,
                                constant: calculateCellWidthFor(width: desiredWidth, padding: desiredPadding))
+            widthLayoutContraint?.priority = .defaultHigh
             widthLayoutContraint?.isActive = true
             
             internalView.model = model
@@ -123,14 +123,14 @@ class DemoCollectionViewCell: UICollectionViewCell {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        os_log("CellDebug %@ %@", type: .debug, String(describing: type(of: self)), #function)
+//        os_log("CellDebug %@ %@", type: .debug, String(describing: type(of: self)), #function)
     }
     
     public override func updateConstraints() {
         internalView?.updateConstraints()
         containerView?.updateConstraints()
         super.updateConstraints()
-        os_log("CellDebug %@ %@", type: .debug, String(describing: type(of: self)), #function)
+//        os_log("CellDebug %@ %@", type: .debug, String(describing: type(of: self)), #function)
     }
     
 }
